@@ -6,21 +6,40 @@ A long session burns tokens and gets dull. `/clear` brings the edge back — and
 
 Claude Code · Codex · [MIT](LICENSE) · [中文](README.md) · English
 
-## Example
+## Flow
 
-You're adding team billing to a live SaaS: schema, settlement API, Stripe webhooks, then the admin UI. It won't fit in one session.
+You're adding team billing to a live SaaS. The schema and settlement API are on disk; tests pass. The session is long; Stripe webhook work starts missing edge cases.
 
-**Session 1.** The schema and API are on disk and tests pass. The context is long; webhook work starts missing edge cases. The phase is done, so the agent writes a continuation prompt and tells you to `/clear`.
+**1. What appears in the terminal**
 
-You type:
+Still the same window. The agent parks a continuation prompt, then says:
+
+```text
+Settlement API is on disk; tests pass. Next session: Stripe webhook idempotency.
+You can /clear now.
+```
+
+**2. What you do**
+
+Don't open a new terminal. Don't copy. Don't paste. In **this window**, type:
 
 ```text
 /clear
 ```
 
-**Session 2.** The new session already has the constraints: read `prisma/schema.prisma` and `apps/api/src/billing.ts`; Stripe test mode only; next is webhook idempotency, don't reopen the schema. It writes the webhook. It does not ask where you left off.
+**3. What happens**
 
-`vibecoding-baton: baton passed` means it landed. If that line doesn't show, the same prompt is on your clipboard. A single feature can relay like this more than once.
+`/clear` wipes the current context. A hook injects the parked prompt into the new session once, then deletes it. The terminal shows:
+
+```text
+vibecoding-baton: baton passed
+```
+
+If that line doesn't show, the same prompt is already on your clipboard.
+
+**4. What you do in the new session**
+
+Same window, new session. You don't recap. Keep going — "continue" is enough. The agent already has the constraints: read `prisma/schema.prisma` and `apps/api/src/billing.ts`; Stripe test mode only; next is webhook idempotency; don't reopen the schema. It will not ask where you left off.
 
 ## Install
 

@@ -6,21 +6,40 @@
 
 Claude Code · Codex · [MIT](LICENSE) · 中文 · [English](README.en.md)
 
-## 例子
+## 流程
 
-给一个已上线的 SaaS 加团队账单：改 schema、写结算 API、接 Stripe webhook、再改管理后台。一天干不完。
+场景：给已上线的 SaaS 加团队账单。schema 和结算 API 已经落地，测试通过。会话很长，接着写 Stripe webhook 时开始漏边界条件。
 
-**会话 1。** schema 和结算 API 已经落地，测试也过了。上下文很长，补 webhook 时开始漏边界条件。阶段收住了，agent 写好续作指令，提示你可以 `/clear`。
+**1. 终端里弹出什么**
 
-你输入：
+当前会话还在这个窗口。agent 先把续作指令写好，然后告诉你：
+
+```text
+结算 API 已落地，测试通过。下一会话从 Stripe webhook 幂等接着做。
+现在可以 /clear。
+```
+
+**2. 人做什么**
+
+不要新开终端，不要复制，不要粘贴。在**同一个窗口**输入：
 
 ```text
 /clear
 ```
 
-**会话 2。** 新会话直接带着这些约束开工：先读 `prisma/schema.prisma` 和 `apps/api/src/billing.ts`；只用 Stripe test mode；下一步是 webhook 幂等，不要重开 schema。它接着写 webhook，不再问「我们做到哪了」。
+**3. 中间发生了什么**
 
-看到 `vibecoding-baton: baton passed`，就是交到了。没看到的话，剪贴板里有同一份指令。同一项功能可以这样接力多次。
+`/clear` 清空当前上下文。hook 把刚才停好的续作指令注入新会话，注入一次后删除。终端出现：
+
+```text
+vibecoding-baton: baton passed
+```
+
+没看到这行时，同一份指令已在剪贴板。
+
+**4. 新会话里人做什么**
+
+还是这个窗口，已经是新会话。人不用再交代进度。直接继续说需求即可，例如「接着做」。agent 已经带着约束开工：先读 `prisma/schema.prisma` 和 `apps/api/src/billing.ts`，只用 Stripe test mode，下一步是 webhook 幂等，不要重开 schema。它不会问「我们做到哪了」。
 
 ## 安装
 
