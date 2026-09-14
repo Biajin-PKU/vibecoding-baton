@@ -1,7 +1,7 @@
 {
   "name": "vibecoding-baton",
   "version": "0.1.0",
-  "description": "Pass the baton between vibe-coding sessions. Park a next-session prompt, then /clear to inject it once.",
+  "description": "When a long session hits a phase boundary, the agent parks the next move. /clear injects it once.",
   "author": {
     "name": "Biajin-PKU",
     "url": "https://github.com/Biajin-PKU"
@@ -14,15 +14,14 @@
   "hooks": "./hooks/hooks.json",
   "interface": {
     "displayName": "Baton",
-    "shortDescription": "Pass work to the next session",
-    "longDescription": "Park a next-session prompt with /baton. The next /clear injects it once, keyed to the project root.",
+    "shortDescription": "Clear the context, not the progress",
+    "longDescription": "When a long session hits a phase boundary, the agent parks the next prompt. Your /clear injects it once.",
     "developerName": "Biajin-PKU",
     "category": "Productivity",
     "capabilities": ["Instructions", "Lifecycle hooks"],
     "websiteURL": "https://github.com/Biajin-PKU/vibecoding-baton",
     "defaultPrompt": [
-      "Park a next-session prompt and tell me when to /clear.",
-      "Pass the baton to a fresh session."
+      "This phase is done and the session is long. Park the next move."
     ],
     "brandColor": "#2F7BFF"
   }

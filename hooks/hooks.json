@@ -1,5 +1,17 @@
 {
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/baton.py\" nudge",
+            "timeout": 5,
+            "statusMessage": "Checking session length..."
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "matcher": "clear",

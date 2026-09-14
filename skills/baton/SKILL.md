@@ -1,32 +1,32 @@
 ---
 name: baton
-description: Park a next-session prompt so /clear injects it once. Use when the user says baton, handoff, checkpoint, "ready to clear", or a phase of long work is done and a fresh session should continue.
+description: When a long session hits a phase boundary, park a next-session prompt so the user's /clear injects it. Use when the length hook fires, a phase of work is done and context is heavy, or the user says the session feels dull. Do not wait for the user to invoke this skill.
 ---
 
-# /baton
+# Baton
 
-Long sessions get slow. This skill writes the next-session prompt and parks it. After `/clear`, the SessionStart hook injects that prompt once.
+Long sessions burn tokens and get dull. You notice. You park the next move. The user only types `/clear`.
 
-## Before parking
+Do not ask them to write a handoff. Do not ask them to run `/baton`.
 
-Answer: **what would `/clear` lose?**
+## When
 
-List what is already on disk vs what still lives only in this session. If in-flight work, unverified edits, or an open decision cannot be written into the prompt, say so and wait.
+Fire at a **phase boundary** after the session is already long (the length hook is the usual signal).
 
-## Write the prompt
+A phase boundary is: a chunk of work landed on disk, verified, and the next chunk is a new unit. Mid-edit, mid-experiment, or an open decision is not a boundary — finish or ask first.
 
-Short. The next session should be able to start from this text alone.
-
-Include:
-
-1. Files to read first (paths)
-2. Decisions already made
-3. Constraints that exist only in this conversation
-4. The next concrete action
-
-Write it in the user's language.
+If clear would lose something you cannot write into the prompt, say so and wait.
 
 ## Park
+
+Write a short prompt the next session can start from alone, in the user's language:
+
+1. Files to read first
+2. Decisions already made
+3. Constraints that only live in this chat
+4. The next concrete action
+
+Then:
 
 ```bash
 python3 "${CLAUDE_PLUGIN_ROOT}/hooks/baton.py" park <<'BATON'
@@ -34,17 +34,12 @@ python3 "${CLAUDE_PLUGIN_ROOT}/hooks/baton.py" park <<'BATON'
 BATON
 ```
 
-If `CLAUDE_PLUGIN_ROOT` is empty, try `CODEX_PLUGIN_ROOT`. If both are empty, stop and tell the user the plugin root is missing.
+If `CLAUDE_PLUGIN_ROOT` is empty, try `CODEX_PLUGIN_ROOT`. If both are empty, stop.
 
-Expect `parked ~/.vibecoding-baton/handoffs/<id>.md`. The script also copies to the clipboard when `pbcopy` / `wl-copy` / `xclip` exists.
+Expect `parked ~/.vibecoding-baton/handoffs/<id>.md`. Clipboard is the fallback.
 
-## Close
+## Tell the user
 
-Tell the user:
-
-- parked path
-- type **`/clear`** in this window
-- a system message `vibecoding-baton: baton passed` means it worked
-- clipboard is the fallback if the message does not appear
+One beat: the next session is ready, type **`/clear`** in this window. `vibecoding-baton: baton passed` means it worked.
 
 Do not open a new terminal. Do not put the prompt on a shell command line.

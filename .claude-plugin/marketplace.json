@@ -4,13 +4,13 @@
     "name": "Biajin-PKU"
   },
   "metadata": {
-    "description": "Pass the baton between vibe-coding sessions"
+    "description": "Clear a long session without losing the next move"
   },
   "plugins": [
     {
       "name": "vibecoding-baton",
       "source": "./",
-      "description": "Park a next-session prompt; /clear injects it once."
+      "description": "Agent parks the next move; /clear injects it once."
     }
   ]
 }

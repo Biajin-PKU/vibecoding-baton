@@ -1,7 +1,7 @@
 {
   "name": "vibecoding-baton",
   "version": "0.1.0",
-  "description": "Pass the baton between vibe-coding sessions. Park a next-session prompt, then /clear to inject it once.",
+  "description": "When a long session hits a phase boundary, the agent parks the next move. /clear injects it once.",
   "author": {
     "name": "Biajin-PKU",
     "url": "https://github.com/Biajin-PKU"

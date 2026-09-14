@@ -76,6 +76,28 @@ class BatonTest(unittest.TestCase):
         proc = self.run_script(["park"], stdin="  \n")
         self.assertEqual(proc.returncode, 1)
 
+    def test_nudge_silent_when_short(self):
+        transcript = Path(self.tmp.name) / "t.jsonl"
+        transcript.write_bytes(b"x" * 100)
+        proc = self.run_script(
+            ["nudge"],
+            stdin=json.dumps({"transcript_path": str(transcript)}),
+        )
+        self.assertEqual(proc.returncode, 0)
+        self.assertEqual(proc.stdout, b"")
+
+    def test_nudge_fires_when_long(self):
+        transcript = Path(self.tmp.name) / "t.jsonl"
+        transcript.write_bytes(b"x" * 100)
+        proc = self.run_script(
+            ["nudge"],
+            stdin=json.dumps({"transcript_path": str(transcript)}),
+            extra_env={"VIBECODING_BATON_BYTES": "50"},
+        )
+        self.assertEqual(proc.returncode, 0, proc.stderr.decode())
+        data = json.loads(proc.stdout.decode("utf-8"))
+        self.assertIn("phase boundary", data["hookSpecificOutput"]["additionalContext"])
+
 
 if __name__ == "__main__":
     unittest.main()
