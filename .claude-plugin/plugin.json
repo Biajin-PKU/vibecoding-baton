@@ -1,0 +1,19 @@
+{
+  "name": "vibecoding-baton",
+  "version": "0.1.0",
+  "description": "Pass the baton between vibe-coding sessions. Park a next-session prompt, then /clear to inject it once.",
+  "author": {
+    "name": "Biajin-PKU",
+    "url": "https://github.com/Biajin-PKU"
+  },
+  "homepage": "https://github.com/Biajin-PKU/vibecoding-baton",
+  "repository": "https://github.com/Biajin-PKU/vibecoding-baton",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "codex",
+    "session",
+    "handoff",
+    "vibe-coding"
+  ]
+}

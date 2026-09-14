@@ -1,0 +1,16 @@
+{
+  "name": "vibecoding-baton",
+  "owner": {
+    "name": "Biajin-PKU"
+  },
+  "metadata": {
+    "description": "Pass the baton between vibe-coding sessions"
+  },
+  "plugins": [
+    {
+      "name": "vibecoding-baton",
+      "source": "./",
+      "description": "Park a next-session prompt; /clear injects it once."
+    }
+  ]
+}
