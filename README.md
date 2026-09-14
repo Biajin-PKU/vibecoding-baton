@@ -1,66 +1,63 @@
 # vibecoding-baton
 
 <p align="center">
-  <img src="assets/logo.png" width="280" alt="vibecoding-baton">
+  <img src="assets/logo.png" width="240" alt="vibecoding-baton">
 </p>
 
-在 vibe-coding 会话之间传接力棒。
+<p align="center"><strong>把这一棒交给下一个会话。</strong></p>
 
-同时支持 **Claude Code** 和 **Codex**。skill 负责写下一会话的 prompt；hook 在 `/clear` 后注入一次。
+<p align="center">
+  Claude Code · Codex<br>
+  <a href="LICENSE">MIT</a>
+  · 中文
+  · <a href="README.en.md">English</a>
+</p>
 
-中文 | [English](README.en.md)
+---
 
-## 为什么是 plugin
+长会话会变慢。你 `/clear`，刚谈妥的下一步也一起没了。于是开始复制一段交接——有时贴上了，有时忘了。
 
-skill 只能把 prompt 写出来。`/clear` 之后自动注入，必须靠 SessionStart hook。两样一起发。
+**vibecoding-baton** 把这件事收成一次接力：`/baton` 写好下一棒，同一窗口 `/clear`，新会话已经拿着棒，接着干。
 
 ## 用法
 
-1. 一个阶段做完，跑 **`/baton`**。
-2. 在**当前窗口**输入 **`/clear`**。
-3. 看到 `vibecoding-baton: baton passed` 就成功了。停放的 prompt 注入一次后删除。
+```text
+/baton
+/clear
+```
 
-没看到这条提示，用剪贴板里的备份。
+看到 `vibecoding-baton: baton passed`，就是交到了。
+
+没看到也没关系，剪贴板里有一份同样的提示。
 
 ## 安装
 
 需要 Python 3。
 
-### Claude Code
+**Claude Code** — 分两条发送：
 
 ```text
 /plugin marketplace add Biajin-PKU/vibecoding-baton
 /plugin install vibecoding-baton@vibecoding-baton
 ```
 
-本地目录：
+**Codex**
 
-```text
-claude plugin install /path/to/vibecoding-baton
+```bash
+codex plugin marketplace add Biajin-PKU/vibecoding-baton
+codex plugin add vibecoding-baton@vibecoding-baton
 ```
 
-### Codex
+新开一个会话。若提示启用 hook，选接受。
 
-把本目录当作 plugin 接入（skills + hooks）。hook 文件是 `hooks/hooks.json`。
+## 它做什么
 
-## 槽位怎么算
+`/baton` 把下一会话该读的文件、已做的决定、还不能丢的约束、下一步动作写成一段短提示，停在本机。
 
-停放和注入都用 `$CLAUDE_PROJECT_DIR`（没有再用 cwd）做哈希。末尾斜杠会去掉，`/proj` 和 `/proj/` 是同一个槽。
+`/clear` 时注入一次，然后删掉。换项目不会串；重启、resume 也不会把棒提前吃掉。
 
-文件在 `~/.vibecoding-baton/handoffs/`。可用 `VIBECODING_BATON_DIR` 改路径。
+数据只在你这台机器上，默认目录是 `~/.vibecoding-baton/handoffs/`。
 
-hook 的 matcher **只匹配 `clear`**。后面的 `startup` / `resume` 不会把文件提前吃掉。
+## License
 
-## 目录
-
-```text
-.claude-plugin/plugin.json
-.codex-plugin/plugin.json
-hooks/baton.py
-hooks/hooks.json
-skills/baton/SKILL.md
-```
-
-## 许可
-
-MIT
+[MIT](LICENSE)

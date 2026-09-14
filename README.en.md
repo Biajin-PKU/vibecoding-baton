@@ -1,66 +1,63 @@
 # vibecoding-baton
 
 <p align="center">
-  <img src="assets/logo.png" width="280" alt="vibecoding-baton">
+  <img src="assets/logo.png" width="240" alt="vibecoding-baton">
 </p>
 
-Pass the baton between vibe-coding sessions.
+<p align="center"><strong>Pass the next move to a fresh session.</strong></p>
 
-Works with **Claude Code** and **Codex**. A skill writes the next-session prompt; a hook injects it once after `/clear`.
+<p align="center">
+  Claude Code · Codex<br>
+  <a href="LICENSE">MIT</a>
+  · <a href="README.md">中文</a>
+  · English
+</p>
 
-[中文](README.md) | English
+---
 
-## Why a plugin
+Long sessions get slow. `/clear` also wipes the next move. So you copy a handoff — and sometimes you forget to paste it.
 
-A skill can write the prompt. Only a SessionStart hook can inject it after `/clear`. Ship both.
+**vibecoding-baton** turns that into a relay. `/baton` writes the next prompt. `/clear` in the same window injects it once. The new session already has the baton.
 
 ## Use
 
-1. When a phase is done, run **`/baton`**.
-2. Type **`/clear`** in the same window.
-3. Look for `vibecoding-baton: baton passed`. The parked prompt is injected once and then deleted.
+```text
+/baton
+/clear
+```
 
-Clipboard is the fallback if that message does not appear.
+`vibecoding-baton: baton passed` means it landed.
+
+If that line doesn't show, the same prompt is on your clipboard.
 
 ## Install
 
-Needs Python 3.
+Python 3 required.
 
-### Claude Code
+**Claude Code** — send these as two separate prompts:
 
 ```text
 /plugin marketplace add Biajin-PKU/vibecoding-baton
 /plugin install vibecoding-baton@vibecoding-baton
 ```
 
-Local checkout:
+**Codex**
 
-```text
-claude plugin install /path/to/vibecoding-baton
+```bash
+codex plugin marketplace add Biajin-PKU/vibecoding-baton
+codex plugin add vibecoding-baton@vibecoding-baton
 ```
 
-### Codex
+Start a new session. Accept the hook if asked.
 
-Point Codex at this folder as a plugin (skills + hooks). The hook file is `hooks/hooks.json`.
+## What it does
 
-## How it keys the slot
+`/baton` parks a short prompt: files to read, decisions already made, constraints that only live in this chat, and the next action.
 
-Park and inject hash `$CLAUDE_PROJECT_DIR` (then cwd). Trailing slashes are stripped, so `/proj` and `/proj/` share one slot.
+`/clear` injects it once, then deletes it. Projects don't share a slot. Startup and resume won't consume it early.
 
-Files live in `~/.vibecoding-baton/handoffs/`. Override with `VIBECODING_BATON_DIR`.
-
-The hook matcher is **`clear` only**. A later `startup` / `resume` will not consume the file.
-
-## Layout
-
-```text
-.claude-plugin/plugin.json
-.codex-plugin/plugin.json
-hooks/baton.py
-hooks/hooks.json
-skills/baton/SKILL.md
-```
+Everything stays on your machine, under `~/.vibecoding-baton/handoffs/`.
 
 ## License
 
-MIT
+[MIT](LICENSE)
