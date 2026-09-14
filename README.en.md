@@ -1,23 +1,10 @@
 # vibecoding-baton
 
-<p align="center">
-  <img src="assets/logo.png" width="240" alt="vibecoding-baton">
-</p>
+A long session burns tokens and gets dull. `/clear` brings the edge back — and wipes the next move with it.
 
-<p align="center"><strong>Pass the next move to a fresh session.</strong></p>
+**vibecoding-baton** clears the context, not the progress. `/baton` writes the next prompt. `/clear` in the same window injects it once. The new session already has the baton.
 
-<p align="center">
-  Claude Code · Codex<br>
-  <a href="LICENSE">MIT</a>
-  · <a href="README.md">中文</a>
-  · English
-</p>
-
----
-
-Long sessions get slow. `/clear` also wipes the next move. So you copy a handoff — and sometimes you forget to paste it.
-
-**vibecoding-baton** turns that into a relay. `/baton` writes the next prompt. `/clear` in the same window injects it once. The new session already has the baton.
+Claude Code · Codex · [MIT](LICENSE) · [中文](README.md) · English
 
 ## Use
 

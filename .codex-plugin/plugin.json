@@ -24,8 +24,6 @@
       "Park a next-session prompt and tell me when to /clear.",
       "Pass the baton to a fresh session."
     ],
-    "brandColor": "#2F7BFF",
-    "composerIcon": "./assets/logo.png",
-    "logo": "./assets/logo.png"
+    "brandColor": "#2F7BFF"
   }
 }

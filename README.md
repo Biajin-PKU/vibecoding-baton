@@ -1,23 +1,10 @@
 # vibecoding-baton
 
-<p align="center">
-  <img src="assets/logo.png" width="240" alt="vibecoding-baton">
-</p>
+会话一长，token 在烧，回复在变钝。`/clear` 能把锐度找回来，也会把刚谈妥的下一步清掉。
 
-<p align="center"><strong>把这一棒交给下一个会话。</strong></p>
+**vibecoding-baton** 让你清上下文，不清进度。`/baton` 写好下一棒，同一窗口 `/clear`，新会话已经拿着棒，接着干。
 
-<p align="center">
-  Claude Code · Codex<br>
-  <a href="LICENSE">MIT</a>
-  · 中文
-  · <a href="README.en.md">English</a>
-</p>
-
----
-
-长会话会变慢。你 `/clear`，刚谈妥的下一步也一起没了。于是开始复制一段交接——有时贴上了，有时忘了。
-
-**vibecoding-baton** 把这件事收成一次接力：`/baton` 写好下一棒，同一窗口 `/clear`，新会话已经拿着棒，接着干。
+Claude Code · Codex · [MIT](LICENSE) · 中文 · [English](README.en.md)
 
 ## 用法
 
