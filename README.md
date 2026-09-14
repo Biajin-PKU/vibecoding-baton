@@ -2,7 +2,7 @@
 
 会话一长，token 在烧，回复在变钝。`/clear` 能把锐度找回来，也会把刚谈妥的下一步清掉。
 
-**vibecoding-baton** 让 agent 自己盯着这件事。上下文够沉、一个阶段也收住了，它会把下一棒停好，然后告诉你：可以 `/clear` 了。你不用写交接，也不用再贴一段 prompt。清完，新会话已经拿着棒。
+**vibecoding-baton** 在会话过长、当前工作告一段落时，由 agent 生成下一会话的续作指令，并提示执行 `/clear`。无需手写交接，也无需粘贴 prompt。清空后，新会话直接续上。
 
 Claude Code · Codex · [MIT](LICENSE) · 中文 · [English](README.en.md)
 

@@ -2,7 +2,7 @@
 
 A long session burns tokens and gets dull. `/clear` brings the edge back — and wipes the next move with it.
 
-**vibecoding-baton** lets the agent watch for that. When the context is heavy and a phase of work has landed, it parks the next prompt and tells you it's safe to `/clear`. You don't write a handoff. You don't paste anything. The new session already has the baton.
+**vibecoding-baton** has the agent prepare a continuation prompt when the session is long and the current phase of work is complete, then asks you to `/clear`. No handoff to write, nothing to paste. The new session picks up where you left off.
 
 Claude Code · Codex · [MIT](LICENSE) · [中文](README.md) · English
 
