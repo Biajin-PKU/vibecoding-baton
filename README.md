@@ -6,17 +6,21 @@
 
 Claude Code · Codex · [MIT](LICENSE) · 中文 · [English](README.en.md)
 
-## 你要做的
+## 例子
 
-装上。继续干活。
+给一个已上线的 SaaS 加团队账单：改 schema、写结算 API、接 Stripe webhook、再改管理后台。一天干不完。
 
-到点了，agent 会说可以清。你输入：
+**会话 1。** schema 和结算 API 已经落地，测试也过了。上下文很长，补 webhook 时开始漏边界条件。阶段收住了，agent 写好续作指令，提示你可以 `/clear`。
+
+你输入：
 
 ```text
 /clear
 ```
 
-看到 `vibecoding-baton: baton passed`，就是交到了。没看到的话，剪贴板里有同一份提示。
+**会话 2。** 新会话直接带着这些约束开工：先读 `prisma/schema.prisma` 和 `apps/api/src/billing.ts`；只用 Stripe test mode；下一步是 webhook 幂等，不要重开 schema。它接着写 webhook，不再问「我们做到哪了」。
+
+看到 `vibecoding-baton: baton passed`，就是交到了。没看到的话，剪贴板里有同一份指令。同一项功能可以这样接力多次。
 
 ## 安装
 

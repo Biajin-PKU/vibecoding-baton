@@ -6,17 +6,21 @@ A long session burns tokens and gets dull. `/clear` brings the edge back — and
 
 Claude Code · Codex · [MIT](LICENSE) · [中文](README.md) · English
 
-## What you do
+## Example
 
-Install it. Keep working.
+You're adding team billing to a live SaaS: schema, settlement API, Stripe webhooks, then the admin UI. It won't fit in one session.
 
-When the agent says it's time:
+**Session 1.** The schema and API are on disk and tests pass. The context is long; webhook work starts missing edge cases. The phase is done, so the agent writes a continuation prompt and tells you to `/clear`.
+
+You type:
 
 ```text
 /clear
 ```
 
-`vibecoding-baton: baton passed` means it landed. If that line doesn't show, the same prompt is on your clipboard.
+**Session 2.** The new session already has the constraints: read `prisma/schema.prisma` and `apps/api/src/billing.ts`; Stripe test mode only; next is webhook idempotency, don't reopen the schema. It writes the webhook. It does not ask where you left off.
+
+`vibecoding-baton: baton passed` means it landed. If that line doesn't show, the same prompt is on your clipboard. A single feature can relay like this more than once.
 
 ## Install
 
